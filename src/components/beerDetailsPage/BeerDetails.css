@@ -1,0 +1,50 @@
+.beer-details {
+    display: flex;
+    flex-direction: column;
+    margin: 4rem 2rem;
+}
+
+.beer-details img {
+    height: 300px;
+    object-fit: contain;
+    margin: 2rem;
+}
+
+.heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.name, 
+.tagline,
+.attenuation-level,
+.first-brewed {
+    margin: 0;
+}
+
+.tagline {
+    color: lightgrey;
+}
+
+.attenuation-level {
+    color: lightgrey;
+    font-size: 30px;
+    font-weight: 400;
+    margin: 0;
+}
+
+.first-brewed {
+    font-weight: 600;
+}
+
+.description {
+    justify-self: flex-start;
+    text-align: justify;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+.created-by {
+    align-self: flex-start;
+}

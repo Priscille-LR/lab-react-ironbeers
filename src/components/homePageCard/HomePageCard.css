@@ -1,0 +1,20 @@
+.homepage-card {
+   margin-bottom: 4rem;
+
+}
+
+.homepage-card-link {
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+}
+
+.homepage-card-link h1 {
+    color: black;
+}
+
+.homepage-card-link p {
+    color: grey;
+    padding: 0 2rem;
+    text-align: justify;
+}
