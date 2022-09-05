@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './NewBeerPage.css'
 
 function NewBeerPage() {
@@ -10,6 +11,8 @@ function NewBeerPage() {
   const [brewersTips, setBrewersTips] = useState('');
   const [attenuationLevel, setAttenuationLevel] = useState('');
   const [contributedBy, setContributedBy] = useState('');
+
+  const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -29,13 +32,17 @@ function NewBeerPage() {
     axios.post(url, body)
     .then((_) => {
       console.log(body)
+    .catch(err => console.log(err))
+
       setName('');
       setTagline('');
       setDescription('');
       setFirstBrewed('');
       setBrewersTips('');
       setAttenuationLevel(0);
-      setContributedBy('');
+      setContributedBy('')
+
+      navigate("/beers")
     });
   };
 

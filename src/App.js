@@ -1,22 +1,22 @@
-import './App.css';
 import { Route, Routes } from 'react-router-dom';
-import Header from './components/header/Header';
 import HomePage from './pages/HomePage';
 import BeersPage from './pages/beersPage/BeersPage';
 import SingleBeerPage from './pages/SingleBeerPage';
-import RandomBeerPage from './pages/RandomBeer';
+import RandomBeerPage from './pages/RandomBeerPage';
 import NewBeerPage from './pages/newBeerPage/NewBeerPage';
+import OutletComponent from './components/outlet/OutletComponent';
 
 function App() {
   return (
-    <div className="App">
-      <Header/>
+    <div className='App'>
       <Routes>
-        <Route path='/' element={<HomePage/>}/>
-        <Route path='/beers' element={<BeersPage/>}/>
-        <Route path='/beers/:beerId' element={<SingleBeerPage/>}/>
-        <Route path='/random-beer' element={<RandomBeerPage/>}/>
-        <Route path='/new-beer' element={<NewBeerPage/>}/>
+        <Route path='/' element={<HomePage />} />
+        <Route element={<OutletComponent />}>
+          <Route path='/beers' element={<BeersPage />} />
+          <Route path='/beers/:beerId' element={<SingleBeerPage />} />
+          <Route path='/random-beer' element={<RandomBeerPage />} />
+          <Route path='/new-beer' element={<NewBeerPage />} />
+        </Route>
       </Routes>
     </div>
   );
