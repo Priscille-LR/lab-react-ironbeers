@@ -4,64 +4,55 @@ import { useNavigate } from 'react-router-dom';
 import './NewBeerPage.css'
 
 function NewBeerPage() {
-  const [name, setName] = useState('');
-  const [tagline, setTagline] = useState('');
-  const [description, setDescription] = useState('');
-  const [firstBrewed, setFirstBrewed] = useState('');
-  const [brewersTips, setBrewersTips] = useState('');
-  const [attenuationLevel, setAttenuationLevel] = useState('');
-  const [contributedBy, setContributedBy] = useState('');
-
   const navigate = useNavigate();
+  const [newBeer, setNewBeer] = useState({
+    name: '', 
+    tagline: '', 
+    description: '', 
+    first_brewed: '', 
+    brewers_tips: '', 
+    attenuation_level: '', 
+    contributed_by: '', 
+  })
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const url = 'https://ih-beers-api2.herokuapp.com/beers/new';
-    const body = {
-      name,
-      tagline,
-      description,
-      first_brewed: firstBrewed,
-      brewers_tips: brewersTips,
-      attenuation_level: attenuationLevel,
-      contributed_by: contributedBy,
-    };
+  const handleChange = (e) => {
+    const value = e.target.value
+    const name = e.target.name
+    setNewBeer({
+      ...newBeer,
+      [name]: value
+    })
+  }
 
-    console.log(body)
+  const handleSubmit = async (e, newBeer) => {
+    const API_URL = 'https://ih-beers-api2.herokuapp.com/beers/new';
 
-    axios.post(url, body)
-    .then((_) => {
-      console.log(body)
-    .catch(err => console.log(err))
-
-      setName('');
-      setTagline('');
-      setDescription('');
-      setFirstBrewed('');
-      setBrewersTips('');
-      setAttenuationLevel(0);
-      setContributedBy('')
-
+    try {
+      e.preventDefault();
+      await axios.post(API_URL, newBeer)
+      console.log(newBeer)
       navigate("/beers")
-    });
+    } catch (error) {
+      console.log(error)
+    }
   };
 
   return (
-    <form className='new-beer-form' onSubmit={handleSubmit}>
+    <form className='new-beer-form' onSubmit={(e) => handleSubmit(e, newBeer)}>
       <label htmlFor='name'>Name</label>
       <input
         type='text'
         name='name'
-        value={name}
-        onChange={(e) => setName(e.target.value)}
+        value={newBeer.name}
+        onChange={handleChange}
       />
 
       <label htmlFor='tagline'>Tagline</label>
       <input
         type='text'
         name='tagline'
-        value={tagline}
-        onChange={(e) => setTagline(e.target.value)}
+        value={newBeer.tagline}
+        onChange={handleChange}
       />
 
       <label htmlFor='description'>Description</label>
@@ -70,40 +61,40 @@ function NewBeerPage() {
         rows="5" cols="30"
         minLength="10" maxLength="400"
         name='description'
-        value={description}
-        onChange={(e) => setDescription(e.target.value)}
+        value={newBeer.description}
+        onChange={handleChange}
       />
 
       <label htmlFor='first_brewed'>First Brewed</label>
       <input
         type='text'
         name='first_brewed'
-        value={firstBrewed}
-        onChange={(e) => setFirstBrewed(e.target.value)}
+        value={newBeer.first_brewed}
+        onChange={handleChange}
       />
 
       <label htmlFor='brewers_tips'>Brewer's Tips</label>
       <input
         type='text'
         name='brewers_tips'
-        value={brewersTips}
-        onChange={(e) => setBrewersTips(e.target.value)}
+        value={newBeer.brewers_tips}
+        onChange={handleChange}
       />
 
       <label htmlFor='attenuation_level'>Attenuation Level</label>
       <input
         type='number'
         name='attenuation_level'
-        value={attenuationLevel}
-        onChange={(e) => setAttenuationLevel(e.target.value)}
+        value={newBeer.attenuation_level}
+        onChange={handleChange}
       />
 
       <label htmlFor='contributed_by'>Contributed By</label>
       <input
         type='text'
         name='contributed_by'
-        value={contributedBy}
-        onChange={(e) => setContributedBy(e.target.value)}
+        value={newBeer.contributed_by}
+        onChange={handleChange}
       />
       <button type="submit">Create</button>
     </form>

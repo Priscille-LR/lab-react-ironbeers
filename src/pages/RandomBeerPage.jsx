@@ -5,16 +5,18 @@ import BeerDetails from '../components/beerDetailsPage/BeerDetails';
 function RandomBeerPage() {
   const [beer, setBeer] = useState({});
 
+  const getBeer = async () => {
+    const API_URL = 'https://ih-beers-api2.herokuapp.com/beers/random';
+    const response = await axios.get(API_URL);
+    setBeer(response.data);
+  }; 
+
   useEffect(() => {
-    const url = 'https://ih-beers-api2.herokuapp.com/beers/random';
-
-    const getBeer = async () => {
-      const response = await axios.get(url);
-      console.log(response.data);
-      setBeer(response.data);
-    };
-
-    getBeer().catch(console.error);
+    try {
+      getBeer()
+    } catch (error) {
+      console.log(error)
+    }
   }, []);
 
   return (

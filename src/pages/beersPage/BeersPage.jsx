@@ -17,10 +17,14 @@ function BeersPage() {
     } 
 
     useEffect(() => {
-      if(search === ''){
-        getBeers('https://ih-beers-api2.herokuapp.com/beers')
-      } else {
-        getBeers(`https://ih-beers-api2.herokuapp.com/beers/search?q=${search}`)
+      try {
+        if(search === ''){
+          getBeers('https://ih-beers-api2.herokuapp.com/beers')
+        } else {
+          getBeers(`https://ih-beers-api2.herokuapp.com/beers/search?q=${search}`)
+        }
+      } catch (error) {
+        console.log(error)
       }
     }, [search])
 
